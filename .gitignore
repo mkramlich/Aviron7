@@ -1,0 +1,4 @@
+*.pyc
+*.swp
+.not-for-public-repo/
+audio/music/

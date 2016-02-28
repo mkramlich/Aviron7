@@ -1,0 +1,279 @@
+TODO Aviron 7
+-------------
+
+UPDATE - 2016 Feb 27 - new TODOs after pushing into GitHub public snapshot:
+    - ensure works with recent Python, PyGame, PGU
+    - precisely document versions
+    - requirements.txt?
+    - revise scripts
+    - remove unused audio
+    - cleanup/refactor the bottled groglib.py
+    - more cleanup, refactors, polish
+
+....................
+
+#1: avatar (or civ) can have a weapon (or not); if avatar has weapon, and he's focused, you can command him to shoot in direction he's facing. the shot flies along and will damage/kill whatever it hits (alien, etc.); when a civ/avatar/marine has a weapon (or not), you can see the difference
+
+#2: you can command focused avatar to enter a nearby parked ship (assuming its doors aren't locked, he's not opposed, etc.); once he's in the ship, you can make the ship takeoff (move up/down) either by directly focusing the ship, or giving the focused avatar command to make the ship do it, either way
+
+#3: you can command focused avatar to enter builing if he's near a door. add a visible door to that building
+
+some ships have missiles, you can see them when mounted; when a missile is launched it becomes a separate Thing in things, and flies/moves on its own. command to make focused ship fire 1 of its missiles. ship can have many missiles
+
+a ship can have escape pods. command to make the ship launch its escape pods, with one passenger/crew inside of each pod. the pod flies away
+
+VVenturius emerges from a portal. "I return from 1903" speech (adapt it for here).
+
+green sarcophagi, standing upright (facing the user)
+
+turn off the base emergency light when all aliens are gone
+
+carrier-type ship. you can see 8 fighters inside it when interior toggled visible. there is a key when focused that makes it launch its fighters
+
+you have 100 btc at start. show your balance on screen
+
+a civ or alien may descend to enter a nearby parked ship. if inside and unopposed by other passengers they may begin "flying it", ascending until off-screen then ceasing
+
+while aliens on the planet a distress beacon will be emitting; the aliens can destroy it or turn it off if they get close to it; while beacon is emitting it will periodically cause an incoming ship full of marines to appear, descending to disembark them. the avatar can also be commanded to turn off or on a beacon, or repair it. it is visibly evident whether a beacon is emitting or not, a red wave pattern represents the emitting
+
+there is a fuel tank on the ground at start; if your avatar is close to a ship and that ship is close to the tank, there's a command to will begin transferring fuel from that tank into the ship's fuel tank
+
+that 1st building can contain cargo of various types (gold, food, salt, iron, weapons, butter, milk, lead, uraniam, etc.). you see the inside, when interior is toggled visible.
+
+some ships when focused you can command them to drop a bomb (while flying); bomb falls down like in RL (with X and Y velocity), then explodes on contact with ground or building or parked ship
+
+marines don't attack aliens by being adjacent and magic; instead they try to stop at edge of gun rangle and shoot them, when they shoot little red laser bolts fly toward the alien and when they touch an alien they damage/kill them.
+
+some ships can have an energy shield on/off; when on it appears as an engulfing line perimeter. v1 just an thick colored ellipse; v2+ can be form-fitting
+
+there's a little ship or vehicle, where if you're guy is in the pilot/driver's seat, then to exit the ship he has to first open/raise the cockpit shell (it animates into open position over time), before he can exit
+
+rnd event: an Orvo will appear in sky, descend down to land on ground, it will unload passengers and/or cargo, and load passengers/cargo, then ascend up until off-screen and disappear
+
+rnd event: 'Space Invaders' appear in sky, look/move like them, they drop bombs which fall down and explode, damaging/killing things
+
+auto turrets that will shoot at hostile ships. versions:
+    1. laser turret
+    2. bullet turret
+    3. missile launcher
+
+hostile ship that drops bombs. they fly/fall each tick. when they hit ground they explode and damage/kill nearby creatures
+
+an object that senses if alien is close, and sets a visible (little red flashing light) and audible alarm (aweet! aweet!)
+
+user can command the focused avatar to embark/disembark ship. and enter/exit buildin. and pickup/drop weapon.
+
+humans look diff while walking
+
+aliens & marines look diff while attacking
+
+when thing is selected, some thing-specific debug text will be shown in a certain rectangular portion of the screen (maybe top center); descs of internal state, AI state, etc.
+
+cool complex multi-floor building (fort?) that's a nested state machine in terms of its physical and visual state... turrets up/down, gates open/closed, elevator in various vertical positions, alarm siren lights/sounds either on/off, an armory room with visible little white/grey guns on wall racks (that can be taken by civs or marines)... all the mutable parts of this building can be selected and directly controlled by user, or indirectly controlled. building has a jail room which contains an alien in imprisoned state (he can't attack anybody and stands still)... there is a room which is a theatre, it has a 'screen' visible on wall showing a little rectangle bitmap of a famous RL film clip (shrunk down to fit) like StarWars StarTrek etc. one room has a vat of colored liquid. there is a minefield just outside the western perimeter wall
+
+APC. you can select and drive around. can have passengers. aliens cant attack humans inside it. has wheels or treats. if wheels you can see them rotate while vehicle drives
+
+wall pylon -- creatures can't walk past it
+
+key to make your ship captain transfer from inside ship to on ground on foot; while on ground, you can focus him, and issue him commands to walk around left/right, or issue command to re-enter ship
+
+add a new much bigger ship that can take the existing ship inside of it like in a docking cradle; if mother ship is focused, can issue a command to make it open or close docking doors, and press a key to make the child ship leave/detach
+
+add a new State mode, where it's a topdown view of space with ships, planets, stars, bases, asteroids
+
+a working elevator inside a building that any human can use (npc civ, marine or pc/avatar)
+
+transporter beam effect. humans can beam in/out of the colony surface, you see the transporter beam
+
+simple circuits: a wire can exist, is on/off, can connect two things, like a power source and a power sink
+
+headlights on the ship, can be on/off; when on it draws some "light beam" things (rays, wave semicircles)
+
+quest/plot framework. command to show list of current unfinished quests
+
+put some Civs inside the BaseHQ building (like passengers)
+
+android about 5-10x high as a human; facing is toward the screen; red rectangle light eye moves back and forth horiz like a cylon, over time
+
+a civ can be walking around inside a ship
+
+horizontal movement command keys for focused ship
+
+make random_ship traffic use a random variety of ship types, using Geometry and Ganymede types
+    create 2 more generic Ship shape designs and use them for random sky traffic choices
+
+hit TAB it skips over Speech instances
+
+every tick, there is a very very small chance that each AlienAdult will "say something", create will create a Speech with some garble like "ngggfth gfftik plagh!" and play audio chosen radomly from the ConditionZero/a* sets
+
+create a green Alien saucer ship....it can have Aliens as passengers, rnd chance one will appear with moving down and orders to disembark once it lands... it might be one of the random traffic ships, it will be filled with 50 Alien adults and several eggs too
+
+wherever human killed, put "blood" on the ground. it's a new Thing subclass. draws as short red line. maybe it expires after N ticks
+
+a ship design where it has 4 landing legs, they come out at an angle, and they're not visible inside the ship hull when fully retracted
+
+if marine/civ attacked by alien but survives, he is wounded; if wounded, he draws visibly different somehow. same thing for Aliens
+
+very small chance every N ticks that Gian will lay an egg. it's a huge egg. when that Gigan-type egg hatches, it creates another Gigan!. the edge will appear to the left of the mother gigan.
+
+when ship parked on ground, if close enough to a Refueler thing, it "connects" to ship, and will automaticaly incrementally (per tick) refuel the ship
+
+ship that can have a shuttle or fighters docked with it, or inside it, and then press a command and it launches/releases them, and the reverse
+    create one Ship class that does this as the POC
+
+every N ticks, if the focused thing is a ship, and it is low on fuel, then game plays a "low fuel warning" sound
+
+add key that's like TAB but only cycles between Ship instances
+
+random chance each tick (rare) that this will happen: ship created in space that descends down to ground, extends landing gear ahead of time, lands, then disembarks it's passengers, who are N civs, then several ticks later this ship takes off, retracts gear, flies up off-screen and is deleted. the code that enables this would also allow me to issue a user command to my ship, telling it to disembark (while landed) it's passengers, in my case my ship contains N marines
+    once this in effect, delete the code that randomly adds civs out of nowhere
+
+when pass disembarks, play 1 each per passenger of the ConditionZero npc_step*.wav sounds
+
+if ship landed, each tick is chance a nearby alien adult on ground may get inside the ship
+    if alien adult inside ship, they can lay eggs
+
+if hovering (in air, not landed, and no move_dir), that still burns 1 fuel each tick; if fuel 0 then start falling, can't hover
+
+if hovering, draw small hovering plumes (only going down from ship bottom)
+
+if 'landed' but landing gear not fully extended, then treat as a CRASH and damage/cripple ship!
+
+if ship 'lands' (stops moving down because hit surface) and civs near ship feet, kill them
+
+Marine can have orders to stand still -- not hunt or wander --- will attack aliens that get nearby
+
+when Marine focused, you can issue commands telling him to Hunt, Wander, or GuardStay, or BoardNearestShip
+    also issue these orders to a focused Civ: BoardNearestShip, Stay, Wander
+
+command to order passengers to disembark
+    command to reembark?
+
+make Thing.event() return (handled, changed), not just changed like now
+
+order civs into your ship as passengers (way to protect them from aliens on colony ground)
+
+giant robot or giant monster/godzilla that can walk around (animate), and step on little civs and crush them
+
+Thumpers - it can be stuck in the ground somewhere, when active, you see it animate up/down, and hear a 'thump-thump-thump' sound like heartbeat, when active, it attracts or repels a certain kind of monster/alien/creature (big sandworm comes on-screen from off?)
+
+what some some Civs are PC's controlled by other humans. turn into client/server architecture, where a client can be on same machine or across the Internet, with each client controlled by a human who controls a single PC/avatar
+
+I return from 1903.... She blinded me with science. Quotes from DBZ. code to make little NPC dialogue bubbles appear on the screen, above the character that said them, then they disappear after X ticks. "We're doomed!" "That's it. game over, man. Game over!" put in lots of cool quotes from sci-fi movies, TV and books.
+
+kung fu fighing
+
+adapt some of my stories and creative scenes to put into Aviron, add code & elements to reproduce them in-game... hairrising fight sceens, badass quotes.... VV/HH and his buxum femdroid assistants Bambi, Wendy Lisa, etc.
+
+Help me, Richard. I'm lost somewhere beyond Jupiter. I think I'm dying. -- message from the character's wife
+    some npc civ may randomly say, rarely, "My wife is lost beyond Jupiter!"
+
+add a midium-giant robot (4x taller than a human) that is white with Red eyes, it is stationary but will kill any Aliens that get too close, zapping them with a red laser bolt. friend to humans
+
+add Neomen. bad ass human fighters ninja Jedi heroes for good, cool music plays when they fight. cool outfits. neon... blue good?
+
+"If someone asks you if you're a god... you say yes."
+
+Speech: optional, draw a line to the source of speech (civ's head)
+
+marine/civ may send distress signal, which may cause a ship to arrive later full of marines, which then lands and deploys the marines
+
+add R2D2 like droid that wanders around... like a civ but diff
+
+a little hovering robot camera thing that flies in a side-view octogon or diamond pattern, and shows a engine plume
+
+Marine/Civ that survives being attacked by alien will become Wounded. if Wounded, a Red bloody indicator is drawn on his body somewhere
+
+bar/restaurant sign outside building "BOOZ TITS ASS $$$$".... about 20 men dropping from sky with parachutes, when reach ground, parachuts go away and they're just Marines walking around....... a shuttle flies across the sky...random, several, diff numbers and colors every once ina while, to make sky look busy with ship traffic, variety of ship shapes/models
+
+put in Stanley Opolis story
+
+put in the Dragon's Story
+
+make a KickStarter project. create a demo video. include cool music in the video, or playlist. maybe use some cool free music, like what I used for Adventureland in it, or that free cool scary song (?) that's like Coulton but not (go dig it up and confirm it's name, forgot offhand)
+
+event where commandos descend from sky on ropes to cool music playing, then hit ground, and begin kicking ass and taking names
+
+adjust code subtly so instead of giving commands to ship you give it to focused Captain/Pilot of the ship, and he in turn makes the ship do things.
+
+a weapon may be on the ground; a civ near it may decided (randomly) to pick it up; if he has it, he can the attack aliens and has small chance of killing them; also if he has weapon, the chance of alien killing him goes down some
+
+make too-old news messages be deleted (each after say 15 seconds)
+
+cargo boxes stacked near building -- command to have them loaded/unload to ship; when cargo in ship, you visibily see it
+
+command to toggle showing interior/exterior view of ship (whether to show innards (passnegers, cargo) or not)
+
+when ship is parked on ground, cannot retract landing gear
+
+add red strain lines to Gigan's eye ball
+
+make Gigan's pupil randomly move around over time, maybe pay attention to interesting events in the world, like your ship moving up/down
+
+google for some free online archive of vector/line-based art, like ships, creatures, stick figures, buildings, etc. that I could download and import/convert for use inside Aviron
+
+find StarFront source and copy over the ship/structure definitions, and then write an importer/converter for use inside Aviron; all those ships ideally, def the stick figures
+
+import some Overmind 3000 dialogue, find excuse to use it somewhere.... add an Evil AI Computer in the world? screen-with-eye-like-Paranoia? yellow with two black eyes like O3000?
+
+refuel ship
+
+command to tell landed ship to move weapons inside ship's cargo out onto the ground
+
+variable speed movement (phased/pulsed based on current tock, borrow code from my other games like WarCommand or wherever I used it before)
+
+diff possible game start scenariods, each with a diff world population, scenario has name and brief description, menu that let's user choose which to start with, shown right app start but before gameplay mode is began
+
+can focus on multiple things; user input commands given to each of them
+
+landing pad
+
+experiment running Aviron in pdb. adjust app init to do a pygame Window instead of fullscreen mode
+
+when marine selected, you can press key to make him throw grenade (if he has, finite supply per), it follows a curved path through air flying, then lands and explodes, damaging alinens nearby, maybe killing them depending on range and the alien's health
+
+chance that a random 'traffic' ship may decide to land and disembark passengers
+
+turret which will auto fire an energy ball at alien ships, or, must be manually fired (selected, issued a command to fire); energy ball is small red sphere, moves through air, once it gets close enough to alien ship it explodes, itself cceasing and damaging the nearby ship
+
+mineral deposits under ground. diff types, each type diff color. rect filled.
+
+mining robot. you can select and issue commands to make it tunnel/drill around underground
+
+ladders
+
+some ships, like Ganymede, can change its ext hull colors upon command
+
+add plot hook framework, simple: first application is code that detects when the Ganymede lands and disembarks its marines, that satisfies a quest, when happens print to log and maybe popup a message
+
+command that toggles, for selected thing, a display which shows the list of commands currently (in current state) handled by it (ex: for Ganymede, the keys to fly down/up, raise/lower legs, etc.)
+
+random ship names for the random sky traffic
+
+instead of all Marines moving to nearest Alien only on one side, ignoring aliens to other side, they'll split forces if makes sense and go in both directions
+
+Rocky's Boots - the chip wire circuitry stuff
+Robot Odyssey - robot submarines that you can customize and load firmware/circuits/chips into. sensors, effectors. propulsion. armor. weapons. cargo space.
+
+switch to using pygame.Rect everywhere, at least for Thing's pos/size
+
+variable speed (pulsed) movement (like from my 1st War Command game)
+
+Bresenham's movement paths (like from my 1st War Command game)
+
+ancient alien ruins
+
+an original Tron light cycle can drive from off-screen, along the ground, into center screen. it looks like it as much as I can
+
+FIX bug that causes app to freeze a few secs after init if music is enabled and the Bjork song is told to load and play
+
+if a ship is flying (eg. sky traffic) and runs out of fuel, it will fall and crash
+
+general: shouldn't pass raw keyboard/mouse input events to every Thing subclass instance's event(self, e) method; instead the Game/State should translate into thing-specific semantic commands like (travel up, travel down, lower landing gear, fire guns, etc.)
+
+bear trap
+
+conveyor belt
+
+
+
