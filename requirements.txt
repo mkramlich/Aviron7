@@ -1,0 +1,5 @@
+# creator devtested successfully with: macos/osx 10.10.2 on 64bit Intel
+
+python ~= 2.7
+pygame ~= 1.9.2
+pgu ~= 0.18

@@ -1,29 +1,25 @@
-#!/usr/bin/python
+#!/usr/bin/env python2.7
 
 '''
 Aviron 7
-sci-fi RTS retro/80's/8-bit computer game with Python, Pygame and PGU
+sci-fi RTS retro/80's/8-bit style computer game, in Python, using Pygame and (Phil Hassey's) PGU
 
 by Mike Kramlich
-2012 April 4
+    started 2012 April 4 (approx. est.)
+    revised 2016 June 25
 '''
 
-import math, os, random, sys#, time
+import math, os, random, sys
 
-import pygame
+import pygame # 1.9.2
 import pygame.font
 import pygame.gfxdraw
 from pygame.mixer import Sound
 from pygame import Rect, Surface
 import pygame.locals
-import pgu
+import pgu # 0.18
 from pgu import engine
 from pgu import text as pgu_text
-
-# dev doc help, on my mac mini:
-#   vi /Library/Python/2.6/site-packages/pgu/engine.py
-# on my macair laptop:
-#   vi /opt/local/Library/Frameworks/Python.framework/Versions/2.6/lib/python2.6/site-packages/pgu/engine.py
 
 import groglib
 
@@ -31,8 +27,7 @@ import groglib
 class MyGame(engine.Game):
     def init(self):
         print 'MyGame.init()'
-        #pygame.mixer.music.set_endevent(MUSIC_ENDED_EVENT)
-        advance_and_play_music(False)#True)
+        advance_and_play_music(True)
 
     def tick(self):
         global tock, msgs
@@ -126,7 +121,10 @@ class MyState(engine.State):
     def event(self, e):
         global focused
         changed = False
-        print 'state event: %s (%s)' % (e, pygame.event.event_name(e.type))
+
+        if e.type != pygame.MOUSEMOTION:
+            print 'state event: %s (%s)' % (e, pygame.event.event_name(e.type))
+
         if e.type == pygame.KEYDOWN and e.key == pygame.K_q:
             pygame.event.post(pygame.event.Event(pygame.locals.QUIT))
             return
@@ -1427,15 +1425,14 @@ pygame.display.set_icon(appicon) # must be called before set_mode
 
 modes_avail = pygame.display.list_modes()
 print modes_avail
-bestsize = modes_avail[0]
-print 'best window size: ' + str(bestsize)
-bestsize = (1280, 720) # mac mini with LCD TV
-bestsize = (1280, 800) # mac air laptop
-ww = bestsize[0]
-wh = bestsize[1]
-#screen = pygame.display.set_mode(bestsize, pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF)
-screen = pygame.display.set_mode(bestsize, pygame.HWSURFACE | pygame.DOUBLEBUF)
-print 'used window size: ' + str(bestsize)
+best_size = modes_avail[0]
+print 'best window size: ' + str(best_size)
+used_size = (1366,720) # you may need to tweak this to fit your avail screen space #TODO make more robust/responsive
+ww = used_size[0]
+wh = used_size[1]
+#screen = pygame.display.set_mode(used_size, pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF)
+screen = pygame.display.set_mode(used_size, pygame.HWSURFACE | pygame.DOUBLEBUF)
+print 'used window size: ' + str(used_size)
 
 title = 'AVIRON 7'
 pygame.display.set_caption(title)
@@ -1578,7 +1575,7 @@ for i in os.walk('audio/music/'):
             fpath = os.path.join(dpath, fn)
             #print fpath
             music_list.append(fpath)
-music_index = random.randrange(-1, len(music_list)-1)
+music_index = -1#random.randrange(-1, len(music_list)-1)
 music_playing_fpath = None
 
 msgs = []

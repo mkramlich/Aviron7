@@ -6,9 +6,20 @@ by Mike Kramlich
 groglogic@gmail.com
 http://synisma.neocities.org
 
-rev. 2012 Apr 4
-rev. 2016 Feb 27
+revised 2016 June 25
 ------------------------------
+
+
+To start playing:
+
+    ./aviron.py
+    
+If that doesn't work you may need to adjust aviron.py's shebang line, or invoke with local-appropriate params, or install the missing dependencies (see requirements.txt)
+
+You may need to adjust the "used_size" assignment (inside aviron.py) to ensure the play window fits on your screen. it's hard-coded at moment to work well on my machine. I'll improve that in the future, low priority now.
+
+
+While playing:
 
 q to Quit
 
@@ -39,6 +50,7 @@ alien eggs never move or attack
 alien eggs will eventually hatch and turn into new alien adults; eggs turn yellow when will hatch soon
 alien adults wander
 alien adults will try to attack and kill any nearby humans; easier for aliens to kill civs than marines
+humans like to verbally express their current feelings/thoughts/plans
 civs are human colonists
 civs wander unless they see aliens, then they flee; they flee from the nearest alien
 marines are human soldiers with a mission of protecting the ships, colony buildings and humans
@@ -46,11 +58,12 @@ marines wander unless they see aliens, then they hunt aliens; they hunt the near
 marines will try to attack and kill any nearby aliens; easier for marines to kill eggs than adults
 Gigan, the giant alien (statue? queen? cyborg?), seems to never move or attack, and is neither hunted or fled from
 
-......
+....................
+
 
 DISCLAIMER & ANTI-WARRANTY
 
 This is not a finished product, by intent. Only an experimental spike for exploring a set of related gameplay ideas and techniques. Though it has some fun play value now, and a vision/roadmap and random bag of cool ideas (see: notes/TODO) for how to evolve it further. Expect flaws. Expect scaffolding. I practice an iterative/refactory/sprinty style that allows for rapid development and shipping of prototypes. There are no tests, by intent, so I can develop at a more rapid pace, though agree that tests are ideal in other situations -- this is NOT one of them. What you see here does not represent or apply or include everything I know about the craft of software engineering or game design, because it just did not matter. This code was never intended to be made public. I'm only making this snapshot visible in order to add another public repo to my GitHub profile and provide further evidence that I can, in fact, bang the rocks together. I love programming and I love designing software and new games and so I've made hobby projects like this a possibly ludicrous number of times over the years, ever since childhood.
 
-You have the right to inspect the code, run it, play it and make personal fixes/upgrades/cleanups of your own, which you keep to yourself. You do not have the right to distribute it, sell it, or make clearly derived works which you then distribute or sell. You may not claim it as your own. You are welcome to submit pull requests to me and open issues. You are welcome to email me asking for new features, and I will give priority to those also offering me USD or Bitcoin. Or LEGO. Or ASL game modules. Or... some kind of candy. Ideally candy that tastes like money. Wait that sounds backward. Money that tastes like candy. LEGO made out of candy which in turn is treated as money by a very odd/innovative tribal people living on a Pacific island. Okay, I'm pretty clearly just utterly fantasizing by now. Therefore I will shut up. And upload.
+You have the right to inspect the code, run it, play it and make personal fixes/upgrades/cleanups of your own, which you keep to yourself. You do not have the right to distribute it, sell it, or make clearly derived works which you then distribute or sell. You may not claim it as your own. You are welcome to submit pull requests to me and open issues. You are welcome to email me asking for new features, and I will give priority to those also offering me USD or Bitcoin.
 

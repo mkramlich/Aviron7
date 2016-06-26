@@ -1,22 +1,54 @@
 TODO Aviron 7
 -------------
 
-UPDATE - 2016 Feb 27 - new TODOs after pushing into GitHub public snapshot:
-    - ensure works with recent Python, PyGame, PGU
-    - precisely document versions
-    - requirements.txt?
-    - revise scripts
-    - remove unused audio
-    - cleanup/refactor the bottled groglib.py
-    - more cleanup, refactors, polish
 
-....................
+BUGS
 
-#1: avatar (or civ) can have a weapon (or not); if avatar has weapon, and he's focused, you can command him to shoot in direction he's facing. the shot flies along and will damage/kill whatever it hits (alien, etc.); when a civ/avatar/marine has a weapon (or not), you can see the difference
+fix issue where when you select certain things, the yellow visual selection rectangle is shifted too far down (the red-flashing LightPost on top of that one building)
 
-#2: you can command focused avatar to enter a nearby parked ship (assuming its doors aren't locked, he's not opposed, etc.); once he's in the ship, you can make the ship takeoff (move up/down) either by directly focusing the ship, or giving the focused avatar command to make the ship do it, either way
+fix issue where the white cockpit window triangle is missing the bottom line segment, other 2 are fine, in the Ganymed class ships
 
-#3: you can command focused avatar to enter builing if he's near a door. add a visible door to that building
+................................
+
+
+POLISH
+
+when thing is focused, some thing-specific debug text will be shown in a certain rectangular portion of the screen (maybe top center); descs of internal state, AI state, etc.
+
+make the display mode (W x H) setting more robust/responsive
+    asof 2016 June 25 hardcoded to (because known to look right with):
+        pygame.display.set_mode(1366,720...)
+
+break up all fn bodies larger than a vim screenful
+
+add a console, only works in debug-mode, for devtesting commands (eg. "add marines 5", etc)
+
+virtualenv-ify
+
+make in-game text font a little larger and easier to read
+
+cleanup/refactor the bundled groglib.py
+
+replace prints with logging
+
+make Thing.event() return (handled, changed), not just changed like now
+
+general: shouldn't pass raw keyboard/mouse input events to every Thing subclass instance's event(self, e) method; instead the Game/State should translate into thing-specific semantic commands like (travel up, travel down, lower landing gear, fire guns, etc.)
+
+switch to using pygame.Rect everywhere, at least for Thing's pos/size
+
+music should either be torn out, or, upgraded and re-enabled
+
+.........................
+
+
+GAMEPLAY
+
+avatar (or civ) can have a weapon (or not); if avatar has weapon, and he's focused, you can command him to shoot in direction he's facing. the shot flies along and will damage/kill whatever it hits (alien, etc.); when a civ/avatar/marine has a weapon (or not), you can see the difference
+
+you can command focused avatar to enter a nearby parked ship (assuming its doors aren't locked, he's not opposed, etc.); once he's in the ship, you can make the ship takeoff (move up/down) either by directly focusing the ship, or giving the focused avatar command to make the ship do it, either way
+
+you can command focused avatar to enter builing if he's near a door. add a visible door to that building
 
 some ships have missiles, you can see them when mounted; when a missile is launched it becomes a separate Thing in things, and flies/moves on its own. command to make focused ship fire 1 of its missiles. ship can have many missiles
 
@@ -67,8 +99,6 @@ humans look diff while walking
 
 aliens & marines look diff while attacking
 
-when thing is selected, some thing-specific debug text will be shown in a certain rectangular portion of the screen (maybe top center); descs of internal state, AI state, etc.
-
 cool complex multi-floor building (fort?) that's a nested state machine in terms of its physical and visual state... turrets up/down, gates open/closed, elevator in various vertical positions, alarm siren lights/sounds either on/off, an armory room with visible little white/grey guns on wall racks (that can be taken by civs or marines)... all the mutable parts of this building can be selected and directly controlled by user, or indirectly controlled. building has a jail room which contains an alien in imprisoned state (he can't attack anybody and stands still)... there is a room which is a theatre, it has a 'screen' visible on wall showing a little rectangle bitmap of a famous RL film clip (shrunk down to fit) like StarWars StarTrek etc. one room has a vat of colored liquid. there is a minefield just outside the western perimeter wall
 
 APC. you can select and drive around. can have passengers. aliens cant attack humans inside it. has wheels or treats. if wheels you can see them rotate while vehicle drives
@@ -102,7 +132,7 @@ horizontal movement command keys for focused ship
 make random_ship traffic use a random variety of ship types, using Geometry and Ganymede types
     create 2 more generic Ship shape designs and use them for random sky traffic choices
 
-hit TAB it skips over Speech instances
+when hit TAB it skips over Speech instances
 
 every tick, there is a very very small chance that each AlienAdult will "say something", create will create a Speech with some garble like "ngggfth gfftik plagh!" and play audio chosen radomly from the ConditionZero/a* sets
 
@@ -148,8 +178,6 @@ when Marine focused, you can issue commands telling him to Hunt, Wander, or Guar
 
 command to order passengers to disembark
     command to reembark?
-
-make Thing.event() return (handled, changed), not just changed like now
 
 order civs into your ship as passengers (way to protect them from aliens on colony ground)
 
@@ -255,8 +283,6 @@ instead of all Marines moving to nearest Alien only on one side, ignoring aliens
 Rocky's Boots - the chip wire circuitry stuff
 Robot Odyssey - robot submarines that you can customize and load firmware/circuits/chips into. sensors, effectors. propulsion. armor. weapons. cargo space.
 
-switch to using pygame.Rect everywhere, at least for Thing's pos/size
-
 variable speed (pulsed) movement (like from my 1st War Command game)
 
 Bresenham's movement paths (like from my 1st War Command game)
@@ -265,15 +291,13 @@ ancient alien ruins
 
 an original Tron light cycle can drive from off-screen, along the ground, into center screen. it looks like it as much as I can
 
-FIX bug that causes app to freeze a few secs after init if music is enabled and the Bjork song is told to load and play
-
 if a ship is flying (eg. sky traffic) and runs out of fuel, it will fall and crash
-
-general: shouldn't pass raw keyboard/mouse input events to every Thing subclass instance's event(self, e) method; instead the Game/State should translate into thing-specific semantic commands like (travel up, travel down, lower landing gear, fire guns, etc.)
 
 bear trap
 
 conveyor belt
 
+that huge Orvo ship that is flying up at start, apparently fleeing colony, perhaps is filled w/100's of colonists?
 
+.......................
 
