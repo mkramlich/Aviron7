@@ -888,7 +888,7 @@ class Civ(Human):
 
     def get_sayings(self):
         if self.flees:
-            return ["OMG!","Run for your lives!","We're doomed!","Help!","Holy fuck!"]
+            return ["OMG!","Run for your lives!","We're doomed!","Help!","Holy fark!"]
         else: return self.sayings
 
     def get_saychance(self):
@@ -954,7 +954,7 @@ class Marine(Human):
                         "Saddle up, boys!",
                         "I need to shoot something.",
                         "Any alien gets near me is gonna go BOOM real fast.",
-                        "'I came to chew gum and kick ass but I'm all out of gum.'",
+                        "'I came to chew gum and kick butt but I'm all out of gum.'",
                         "'Another a bug hunt?'"]
 
     def draw(self, dest, draw_base_xy=(0,0)):
@@ -1558,7 +1558,7 @@ avatar = Avatar(x, y) # the user's avatar or PC (player character)
 things.append(avatar)
 focused = avatar
 
-intro = "You live in a different universe. The universe of Aviron 7. You are on a mission. A secret mission known only to you. You have a laser pistol and an itch to scratch. The galaxy is your oyster. You don't even know what an oyster is. It might be like a Veraxian tigercat. You saw one of those once. On a holo-TV show. You like watching holo-TV. Oh look, a Marine assault shuttle is landing. Perhaps they've come because of the aliens that are killing all the colonists. Perhaps it's because of these aliens that the giant Orvo cargo freighter is taking off and fleeing the planet post-haste. Perhaps you should flee as well. Though you'd love to stay and see the fight. Marines like to kick ass and take names. And these evil alien bastards probably don't have names. So they'll just be kicking ass."
+intro = "You live in a different universe. The universe of Aviron 7. You are on a mission. A secret mission known only to you. You have a laser pistol and an itch to scratch. The galaxy is your oyster. You don't even know what an oyster is. It might be like a Veraxian tigercat. You saw one of those once. On a holo-TV show. You like watching holo-TV. Oh look, a Marine assault shuttle is landing. Perhaps they've come because of the aliens that are killing all the colonists. Perhaps it's because of these aliens that the giant Orvo cargo freighter is taking off and fleeing the planet post-haste. Perhaps you should flee as well. Though you'd love to stay and see the fight. Marines like to kick butt and take names. And these evil alien bastards probably don't have names. So they'll just be kicking butt."
 things.append( StoryOverlay(500, 130, intro, tock_life=200))
 
 clock = None
