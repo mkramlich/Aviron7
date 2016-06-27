@@ -1,5 +1,6 @@
-# creator devtested successfully with: macos/osx 10.10.2 on 64bit Intel
 
-python ~= 2.7
+# creator devtests successfully with, and known to work with:
+#     python 2.7, macos/osx 10.10.2 on 64-bit 1.6 GHz Intel Core i5, 4 GB mem
+
 pygame ~= 1.9.2
 pgu ~= 0.18
