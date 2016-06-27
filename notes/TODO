@@ -23,11 +23,7 @@ break up all fn bodies larger than a vim screenful
 
 add a console, only works in debug-mode, for devtesting commands (eg. "add marines 5", etc)
 
-virtualenv-ify
-
 make in-game text font a little larger and easier to read
-
-cleanup/refactor the bundled groglib.py
 
 replace prints with logging
 
@@ -38,6 +34,10 @@ general: shouldn't pass raw keyboard/mouse input events to every Thing subclass 
 switch to using pygame.Rect everywhere, at least for Thing's pos/size
 
 music should either be torn out, or, upgraded and re-enabled
+
+test whether requirements.txt works correctly with 'pip install'
+
+virtualenv-ify
 
 .........................
 
@@ -316,6 +316,8 @@ You wife is lost somewhere beyond Jupiter. Find her and restore her to life.
 There is a bounty on your head in the X system. Try to clear your name.
 
 You've been offered a lucrative and exclusive contract to deliver in-system a special cargo from the primary orbital station of planet X to the outermost planet.
+
+when marines are fighting aliens, presumeably via shooting them with guns, there should be pew-pew sounds and visual effects
 
 .......................
 

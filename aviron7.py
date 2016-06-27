@@ -6,7 +6,7 @@ sci-fi RTS retro/80's/8-bit style computer game, in Python, using Pygame and (Ph
 
 by Mike Kramlich
     started 2012 April 4 (approx. est.)
-    revised 2016 June 25
+    revised 2016 June 26
 '''
 
 import math, os, random, sys
@@ -21,7 +21,19 @@ import pgu # 0.18
 from pgu import engine
 from pgu import text as pgu_text
 
-import groglib
+
+def rand_success(chance):
+    assert 0.0 <= chance <= 1.0, 'chance param %s must satisfy: 0.0 <= chance <= 1.0' % chance
+    if chance == 0.0: return False
+    return random.random() <= chance
+
+def distance(x1,y1, x2,y2):
+    xd = abs(x2 - x1)
+    yd = abs(y2 - y1)
+    tmp = (xd * xd) + (yd * yd)
+    d = math.sqrt(tmp)
+    d = int(d)
+    return d
 
 
 class MyGame(engine.Game):
@@ -37,7 +49,7 @@ class MyGame(engine.Game):
             changed = False
             for th in things:
                 changed = (th.tick() or changed)
-            if count_civs() < 10 and groglib.rand_success(0.01): #TODO should not walk count civs each time, bad algo
+            if count_civs() < 10 and rand_success(0.01): #TODO should not walk count civs each time, bad algo
                 new_civ_on_ground()
                 news('civ added to colony')
                 changed = True
@@ -134,7 +146,7 @@ class MyState(engine.State):
             #TODO build list all things that overlap click pt & cycleselect thru
             th_ds = []
             for th in things:
-                d = int(groglib.dist(mx,my, th.x,th.y)) #TODO use th's bounds
+                d = int(distance(mx,my, th.x,th.y)) #TODO use th's bounds
                 th_ds.append( (d,th) )
             th_ds_sorted = sorted(th_ds, key=lambda x: x[0])
             focused = th_ds_sorted[0][1]
@@ -720,7 +732,7 @@ class Humanoid(Thing):
         changed = False
 
         if self.wanders:
-            if groglib.rand_success(0.1): # 20% chance of changing movement heading
+            if rand_success(0.1): # 20% chance of changing movement heading
                 self.dir = random.choice(self.dirs)
 
         if self.flees:
@@ -729,7 +741,7 @@ class Humanoid(Thing):
             for th in things:
                 if th is self: continue
                 if self.does_fear(th):
-                    d = int(groglib.dist(self.x,self.y, th.x,th.y))
+                    d = int(distance(self.x,self.y, th.x,th.y))
                     if not nearest_fear:
                         nearest_fear = th
                         nearest_fear_dist = d
@@ -763,7 +775,7 @@ class Humanoid(Thing):
             for th in things:
                 if th is self: continue
                 if self.does_hunt(th):
-                    d = int(groglib.dist(self.x,self.y, th.x,th.y))
+                    d = int(distance(self.x,self.y, th.x,th.y))
                     if not nearest_hunted:
                         nearest_hunted = th
                         nearest_hunted_dist = d
@@ -840,7 +852,7 @@ class Human(Humanoid):
     def tick(self):
         changed = Humanoid.tick(self)
         if len(self.get_sayings()):
-            if groglib.rand_success(self.get_saychance()):
+            if rand_success(self.get_saychance()):
                 speech = random.choice(self.get_sayings())
                 yvar = random.randrange(0,51)
                 tl = random.randrange(40,90)
@@ -995,7 +1007,7 @@ class Marine(Human):
             self.flees = False
 
         def in_attack_range(me, other):
-            return groglib.dist(me.x,me.y, other.x,other.y) <= 15
+            return distance(me.x,me.y, other.x,other.y) <= 15
 
         if self.attacks:
             for th in things: #TODO just iter through all aliens
@@ -1004,7 +1016,7 @@ class Marine(Human):
                     if in_attack_range(self,th):
                         chance = isinstance(th,AlienEgg) and 0.9 or 0.4
                         victim = th.name
-                        if groglib.rand_success(chance):
+                        if rand_success(chance):
                             news('marine %s killed %s! *BOOYA!*' % (self.name,victim))
                             cincr('%ss killed by marines' % victim)
                             things.remove(th) #TODO send event to victim telling it he's been attacked/killed
@@ -1060,7 +1072,7 @@ class AlienEgg(Alien):
 
     def tick(self):
         changed = Alien.tick(self)
-        if self.ready_to_hatch() and groglib.rand_success(0.05):
+        if self.ready_to_hatch() and rand_success(0.05):
             things.append( AlienAdult(self.x, self.y))
             things.remove(self)
             cincr('alien eggs hatched')
@@ -1133,18 +1145,18 @@ class AlienAdult(Alien):
             self.pupil_x_offset = nx
 
         def in_attack_range(alien, civ):
-            return groglib.dist(alien.x,alien.y, civ.x,civ.y) <= 15
+            return distance(alien.x,alien.y, civ.x,civ.y) <= 15
         if self.attacks:
             for th in things: #TODO just iter through all humans
                 if th is self: continue
                 if isinstance(th,(Civ,Avatar)) and not isinstance(th,Marine):
                     if in_attack_range(self,th):
-                        if groglib.rand_success(0.9):
+                        if rand_success(0.9):
                             news('alien killed %s!' % th.name)
                             if isinstance(th,Civ): cincr('civs killed by aliens')
                             things.remove(th) #TODO send event to victim telling it he's been attacked/killed
                             play_sound('alien-kills-human')
-                            if self.egglayer and groglib.rand_success(0.9):
+                            if self.egglayer and rand_success(0.9):
                                 lay_egg(self.x,self.y)
                         else:
                             news('alien attacked %s but he survived!' % th.name)
@@ -1153,12 +1165,12 @@ class AlienAdult(Alien):
                         break
                 if isinstance(th,Marine):
                     if in_attack_range(self,th):
-                        if groglib.rand_success(0.4):
+                        if rand_success(0.4):
                             news('alien killed marine %s!' % th.name)
                             cincr('marines killed by aliens')
                             things.remove(th) #TODO send event to victim telling it he's been attacked/killed
                             play_sound('alien-kills-human')
-                            if self.egglayer and groglib.rand_success(0.6):
+                            if self.egglayer and rand_success(0.6):
                                 lay_egg(self.x,self.y)
                         else:
                             news('alien attacked marine %s but he survived!' % th.name)
