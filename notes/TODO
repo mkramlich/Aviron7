@@ -15,6 +15,8 @@ POLISH
 
 when thing is focused, some thing-specific debug text will be shown in a certain rectangular portion of the screen (maybe top center); descs of internal state, AI state, etc.
 
+when thing has focus, a 'command key hint' callout bubble is shown for that thing (eg. a ship is focused, and the callout display 'k - extend landing gear, i - retract landing gear' etc), be extremely compact yet readable; toggleable; dynamic/data-driven
+
 make the display mode (W x H) setting more robust/responsive
     asof 2016 June 25 hardcoded to (because known to look right with):
         pygame.display.set_mode(1366,720...)
@@ -38,6 +40,8 @@ music should either be torn out, or, upgraded and re-enabled
 test whether requirements.txt works correctly with 'pip install'
 
 virtualenv-ify
+
+PEP8 and linting
 
 .........................
 
